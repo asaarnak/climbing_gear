@@ -140,6 +140,22 @@
             margin-bottom: 1.5rem;
         }
 
+
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
         .card {
             background: var(--badge-bg);
             border: 1px solid var(--border);
@@ -165,8 +181,8 @@
         .card-header {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 0.25rem;
+            gap: 0.25rem;
+            margin-bottom: 0rem;
         }
 
         @media (min-width: 400px) {
@@ -185,6 +201,27 @@
             flex: 1;
             word-wrap: break-word;
             overflow-wrap: break-word;
+        }
+
+        .product-name a {
+            text-decoration: underline;
+            color: var(--accent);
+            transition: color 0.2s;
+        }
+
+        .product-name a:hover {
+            color: var(--accent-hover);
+        }
+
+        .small-link {
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .small-link:hover {
+            color: var(--accent-hover);
         }
 
         .price-container {
@@ -227,25 +264,15 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            margin: 0.25rem 0;
+            margin: 0.1rem 0;
         }
 
         @media (min-width: 640px) {
             .image-gallery {
                 flex-direction: row;
-                overflow-x: auto;
-                -ms-overflow-style: none;
-                scrollbar-width: thin;
+                flex-wrap: wrap;
+                justify-content: flex-start;
             }
-        }
-
-        .image-gallery::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .image-gallery::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
-            border-radius: 4px;
         }
 
         .gallery-item {
@@ -419,6 +446,85 @@
                 padding: 0.5rem;
             }
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #ccc;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s;
+            z-index: 1001;
+        }
+
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Adjust product image cursor */
+        .product-image {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -426,330 +532,227 @@
 
     <div class="container">
         <h1>Ronimisvarustus Juuli-Annile!</h1>
-        <div class="subtitle">
-            <p>Valisin julgestusvahendiks GriGri+ (kas sobib?) ja vastavalt köie
-                9.5 mm või 9.6 mm.</p>
-            <p style="margin-top: 1rem;">Minu köis oli 9.5 mm, kuigi kaalusin endale ka 9.2 mm või 9.3 mm. Väiksema
-                diameetriga köis võib aga liiga hästi läbi joosta, eriti kui kasutusel on
-                näiteks mõni teine julgestusvahend (ATC vms). Petzli kodulehelt: <br><em>„Compatible with 8.5 to 11 mm
-                    dynamic single ropes and optimized for those
-                    8.9 to 10.5 mm“</em>.</p>
-            <p style="margin-top: 1rem;">Lisasin lühikese ja pika enesejulgestusotsa, kui soovid ka neid. Lühikese otsa
-                ja GriGri+
-                jaoks lisasin karabiinid, pikal olemas karabiin. Ja ka ronimisprillid.</p>
-
-        </div>
-
-
-
-        <!-- ROPES SECTION -->
         <div style="margin-bottom: 4rem;">
-            <div
-                style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--border); margin-bottom: 1rem; padding-bottom: 0.5rem;">
-                <h3 style="margin: 0; color: var(--text-main); font-size: 1.25rem;">Köied</h3>
-                <a href="https://edelrid.com/eu-en/sport/ropes-shop?filter[7][]=42&filter[6][min]=9.2&filter[6][max]=9.6"
-                    target="_blank" class="small-link" style="margin: 0;">Muud 9.2mm - 9.6mm köied</a>
-            </div>
-            <div class="grid">
-                <!-- Eagle Lite -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="product-name">1. Edelrid Eagle Lite 9.5mm (50m)</h3>
-
-                    </div>
-
-                    <div class="image-gallery">
-                        <div class="gallery-item">
-                            <img src="https://dr6u1nbiy16vs.cloudfront.net/5637876582/Images/N1-01.jpg"
-                                alt="Eagle Lite Red" class="product-image">
-
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://dr6u1nbiy16vs.cloudfront.net/5637876583/Images/N1-01.jpg"
-                                alt="Eagle Lite Blue" class="product-image">
-
-                        </div>
-                    </div>
-
-                    <div class="links"
-                        style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                        <a href="https://edelrid.com/eu-en/sport/ropes/eagle-lite-9-5mm" target="_blank"
-                            class="small-link" style="margin: 0;">Tootja lehele</a>
-                    </div>
-                </div>
-                <!-- Parrot 2R -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="product-name">2. Edelrid Parrot 2R 9.6mm (40m)</h3>
-                    </div>
-
-                    <div class="image-gallery">
-                        <div class="gallery-item single">
-                            <img src="https://dr6u1nbiy16vs.cloudfront.net/5638297091/Images/N1-01.jpg"
-                                alt="Parrot 2R Assorted" class="product-image">
-
-                        </div>
-                    </div>
-
-                    <div class="links"
-                        style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                        <a href="https://edelrid.com/eu-en/sport/ropes/parrot-9-6mm" target="_blank" class="small-link"
-                            style="margin: 0;">Tootja lehele</a>
-                    </div>
-                </div>
-
-                <!-- Neo 100 3R -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="product-name">3. EDELRID Neo 100 3R 9.6 mm (50m) Lavender</h3>
-                    </div>
-
-                    <div class="image-gallery">
-                        <div class="gallery-item single">
-                            <img src="https://m.media-amazon.com/images/I/51IbaA07LzL._AC_SX679_.jpg"
-                                alt="Neo 100 3R Lavender" class="product-image">
-
-                        </div>
-                    </div>
-
-                    <div class="links"
-                        style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                        <a href="https://edelrid.com/eu-en/sport/ropes/neo-100-3r-9-6mm" target="_blank"
-                            class="small-link" style="margin: 0;">Tootja lehele</a>
-                    </div>
-                </div>
-
-                <!-- Eagle Lite Eco Dry -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="product-name">4. Edelrid Eagle Lite Eco Dry 9.5mm (50m)</h3>
-                    </div>
-
-                    <div class="image-gallery">
-                        <div class="gallery-item">
-                            <img src="https://cdn-www.sportokay.com/media/catalog/product/cache/1/image/1022x1131/9df78eab33525d08d6e5fb8d27136e95/c/a/cartware_3dpicture_UAmhlq.jpg"
-                                alt="Eagle Lite Eco Dry Green" class="product-image">
-
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://shopapi.edelrid.com/v1/media/image/edelrid/45299/original"
-                                alt="Eagle Lite Eco Dry Red" class="product-image">
-
-                        </div>
-                    </div>
-
-                    <div class="links"
-                        style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                        <a href="https://edelrid.com/eu-en/sport/ropes/eagle-lite-eco-dry-9-5mm" target="_blank"
-                            class="small-link" style="margin: 0;">Tootja lehele</a>
-                    </div>
-                </div>
-
-
-
-            <!-- Petzl Kliff Rope Bag -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="product-name">Petzl Kliff Rope Bag (Red)</h3>
-                    <div style="margin-top: 0.5rem;">
-                        <span
-                            style="font-size: 0.85rem; font-weight: 700; color: var(--accent); background: #eff6ff; padding: 0.25rem 0.6rem; border-radius: 4px;">Kott
-                            sisaldab köiealust</span>
-                    </div>
-                </div>
-
-                <div class="image-gallery">
-                    <div class="gallery-item">
-                        <img src="https://m.media-amazon.com/images/I/71z+ldXv2IL._AC_SL1200_.jpg"
-                            alt="Petzl Kliff Rope Bag" class="product-image" style="background: white;">
-
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://m.media-amazon.com/images/I/91jvhpe0jIL._AC_SL1500_.jpg"
-                            alt="Petzl Kliff Back" class="product-image" style="background: white;">
-
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://m.media-amazon.com/images/I/61cZcxDlqtL._AC_SL1200_.jpg"
-                            alt="Petzl Kliff Open" class="product-image" style="background: white;">
-
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://m.media-amazon.com/images/I/61WYBCKlhGL._AC_SL1200_.jpg"
-                            alt="Petzl Kliff in use" class="product-image" style="background: white;">
-
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://m.media-amazon.com/images/I/61ykVkz3oyL._AC_SL1200_.jpg"
-                            alt="Petzl Kliff Tarp detail" class="product-image" style="background: white;">
-
-                    </div>
-                </div>
-
-                <div class="links"
-                    style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                    <a href="https://www.petzl.com/INT/en/Sport/Packs-and-accessories/KLIFF" target="_blank"
-                        class="small-link" style="margin: 0;">Tootja lehele</a>
-                </div>
-            </div>
-
-            <!-- Petzl Tarp -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="product-name">Petzl Tarp</h3>
-
-                </div>
-
-                <div class="image-gallery">
-                    <div class="gallery-item single">
-                        <img src="https://m.media-amazon.com/images/I/51FK3ToY3IL._AC_SL1200_.jpg" alt="Petzl Tarp"
-                            class="product-image" style="background: white;">
-
-                    </div>
-                </div>
-
-                <div class="links"
-                    style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                    <a href="https://www.petzl.com/INT/en/Sport/Packs-and-accessories/TARP" target="_blank"
-                        class="small-link" style="margin: 0;">Tootja lehele</a>
-                </div>
-            </div>
-            </div>
-
-            <!-- JULGESTUSVAHENDID SECTION -->
-            <div style="margin-bottom: 2rem;">
-                <h3
-                    style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-size: 1.25rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem;">
-                    Julgestusvahendid</h3>
-                <div class="grid">
-                    <!-- GriGri+ -->
-                    <div class="card" style="grid-column: 1 / -1;">
+            <div class="card" style="padding: 1.5rem; background-color: #f8fafc;">
+                <div class="grid" style="gap: 2rem; border: none; box-shadow: none; background: transparent;">
+                    <!-- Edelrid Eagle Lite -->
+                    <div class="product-item">
                         <div class="card-header">
-                            <h3 class="product-name">Petzl GriGri+</h3>
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem;">
+                                <h3 class="product-name"><a
+                                        href="https://edelrid.com/eu-en/sport/ropes/eagle-lite-9-5mm?variant=574988"
+                                        target="_blank">Edelrid Eagle Lite 9.5mm (50m)</a></h3>
+                                <a href="https://edelrid.com/eu-en/sport/ropes-shop?sort=new_desc&filter[7][]=42&filter[6][min]=9.5&filter[6][max]=9.6"
+                                    target="_blank" class="small-link" style="margin: 0;">Kõik Edelrid 9.5mm - 9.6mm
+                                    köied.</a>
+                            </div>
+                        </div>
 
+                        <div class="image-gallery">
+                            <div class="gallery-item">
+                                <img src="https://shopapi.edelrid.com/v1/media/image/edelrid/23491/web-xs"
+                                    alt="Eagle Lite Red" class="product-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Petzl Kliff Rope Bag -->
+                    <div class="product-item">
+                        <div class="card-header">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+                                <h3 class="product-name" style="margin: 0;"><a
+                                        href="https://www.petzl.com/INT/en/Sport/Packs-and-accessories/KLIFF"
+                                        target="_blank">Petzl Kliff Rope Bag (Red)</a></h3>
+                                <span
+                                    style="font-size: 0.85rem; font-weight: 700; color: var(--accent); background: #eff6ff; padding: 0.25rem 0.6rem; border-radius: 4px;">Kott
+                                    sisaldab köiealust</span>
+                            </div>
+                        </div>
+
+                        <div class="image-gallery">
+                            <div class="gallery-item">
+                                <img src="https://m.media-amazon.com/images/I/71z+ldXv2IL._AC_SL1200_.jpg"
+                                    alt="Petzl Kliff Rope Bag" class="product-image" style="background: white;">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://m.media-amazon.com/images/I/61cZcxDlqtL._AC_SL1200_.jpg"
+                                    alt="Petzl Kliff Open" class="product-image" style="background: white;">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://m.media-amazon.com/images/I/61WYBCKlhGL._AC_SL1200_.jpg"
+                                    alt="Petzl Kliff in use" class="product-image" style="background: white;">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://m.media-amazon.com/images/I/61ykVkz3oyL._AC_SL1200_.jpg"
+                                    alt="Petzl Kliff Tarp detail" class="product-image" style="background: white;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Petzl Tarp -->
+                    <div class="product-item">
+                        <div class="card-header">
+                            <h3 class="product-name"><a
+                                    href="https://www.petzl.com/INT/en/Sport/Packs-and-accessories/TARP"
+                                    target="_blank">Petzl Tarp</a></h3>
+                        </div>
+
+                        <div class="image-gallery">
+                            <div class="gallery-item single">
+                                <img src="https://m.media-amazon.com/images/I/51FK3ToY3IL._AC_SL1200_.jpg"
+                                    alt="Petzl Tarp" class="product-image" style="background: white;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GriGri+ -->
+                    <div class="product-item">
+                        <div class="card-header">
+                            <h3 class="product-name"><a
+                                    href="https://www.petzl.com/INT/en/Sport/Belay-devices-and-descenders/GRIGRI-PLUS"
+                                    target="_blank">Petzl GriGri+</a></h3>
                         </div>
 
                         <div class="image-gallery">
                             <div class="gallery-item third">
                                 <img src="https://dr6u1nbiy16vs.cloudfront.net/5637544374/Images/N1-01.jpg"
                                     alt="GriGri+ Hall" class="product-image">
-
                             </div>
                             <div class="gallery-item third">
                                 <img src="https://dr6u1nbiy16vs.cloudfront.net/5637544375/Images/N1-01.jpg"
                                     alt="GriGri+ Oranž" class="product-image">
-
                             </div>
                             <div class="gallery-item third">
                                 <img src="https://dr6u1nbiy16vs.cloudfront.net/5637544376/Images/N1-01.jpg"
                                     alt="GriGri+ Lilla" class="product-image">
-
                             </div>
-                        </div>
-
-                        <div class="links"
-                            style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                            <a href="https://www.petzl.com/INT/en/Sport/Belay-devices-and-descenders/GRIGRI-PLUS"
-                                target="_blank" class="small-link" style="margin: 0;">Tootja lehele</a>
                         </div>
                     </div>
 
                     <!-- Carabiner -->
-                    <div class="card">
+                    <div class="product-item">
                         <div class="card-header">
-                            <h3 class="product-name">PETZL Am'D Lightweight Asymmetric Carabiner (Triact Lock)</h3>
-
+                            <h3 class="product-name"><a href="https://www.petzl.com/INT/en/Tactical/Connectors/Am-D"
+                                    target="_blank">PETZL Am'D Lightweight Asymmetric Carabiner (Triact Lock)</a></h3>
                         </div>
 
                         <div class="image-gallery">
                             <div class="gallery-item single">
                                 <img src="https://m.media-amazon.com/images/I/61O5NX9+FVL._AC_SY879_.jpg"
                                     alt="Petzl Am'D Carabiner" class="product-image" style="background: white;">
-
                             </div>
                         </div>
+                    </div>
 
-                        <div class="links"
-                            style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                            <a href="https://www.petzl.com/INT/en/Tactical/Connectors/Am-D" target="_blank"
-                                class="small-link" style="margin: 0;">Tootja lehele</a>
+                    <!-- Grivel Daisy Chain Evo 125cm -->
+                    <div class="product-item">
+                        <div class="card-header">
+                            <h3 class="product-name"><a href="https://grivel.com/products/grivel-daisy-chain-evo"
+                                    target="_blank">Grivel Daisy Chain Evo Bigwall (125cm)</a></h3>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Grivel Daisy Chain Evo 125cm -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="product-name">Grivel Daisy Chain Evo Bigwall (125cm)</h3>
-
-                    </div>
-
-                    <div class="image-gallery">
-                        <div class="gallery-item single">
-                            <img src="https://dr6u1nbiy16vs.cloudfront.net/5637840844/Images/N5-05.jpg"
-                                alt="Grivel Daisy Chain 125cm" class="product-image" style="background: white;">
-
+                        <div class="image-gallery">
+                            <div class="gallery-item single">
+                                <img src="https://grivel.com/cdn/shop/products/slingsdaisychainevo2021.png?v=1739989924&width=1400"
+                                    alt="Grivel Daisy Chain 125cm" class="product-image" style="background: white;">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="links"
-                        style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                        <a href="https://grivel.com/products/grivel-daisy-chain-evo" target="_blank" class="small-link"
-                            style="margin: 0;">Tootja lehele</a>
-                    </div>
-                </div>
+                    <!-- Grivel Sport Chain Evo 58cm -->
+                    <div class="product-item">
+                        <div class="card-header">
+                            <h3 class="product-name"><a href="https://us.grivel.com/products/grivel-sport-chain-evo"
+                                    target="_blank">Grivel Sport Chain Evo Bigwall (58cm)</a></h3>
+                        </div>
 
-                <!-- Grivel Sport Chain Evo 58cm -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="product-name">Grivel Sport Chain Evo Bigwall (58cm)</h3>
-
-                    </div>
-
-                    <div class="image-gallery">
-                        <div class="gallery-item single">
-                            <img src="https://dr6u1nbiy16vs.cloudfront.net/5637776858/Images/N3-13.jpg"
-                                alt="Grivel Sport Chain 58cm" class="product-image" style="background: white;">
-
+                        <div class="image-gallery">
+                            <div class="gallery-item single">
+                                <img src="https://us.grivel.com/cdn/shop/files/slingssportchainevo2021.png?v=1747776438&width=1200"
+                                    alt="Grivel Sport Chain 58cm" class="product-image" style="background: white;">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="links"
-                        style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                        <a href="https://us.grivel.com/products/grivel-sport-chain-evo" target="_blank"
-                            class="small-link" style="margin: 0;">Tootja lehele</a>
-                    </div>
-                </div>
-
-                <!-- Belay Glasses -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="product-name">BG Climbing Belay Glasses</h3>
-
-                    </div>
-
-                    <div class="image-gallery">
-                        <div class="gallery-item single">
-                            <img src="https://m.media-amazon.com/images/I/61T-nqfv99L._AC_SX679_.jpg"
-                                alt="BG Belay Glasses" class="product-image" style="background: white;">
-
+                    <!-- Belay Glasses -->
+                    <div class="product-item">
+                        <div class="card-header">
+                            <h3 class="product-name"><a
+                                    href="https://www.amazon.de/-/en/BG-Climbing-Belay-glasses-black/dp/B07TSFZVGJ"
+                                    target="_blank">BG Climbing Belay Glasses</a></h3>
                         </div>
-                    </div>
 
-                    <div class="links"
-                        style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #f1f5f9; padding-top: 0.75rem; margin-top: auto;">
-                        <a href="https://www.amazon.de/-/en/BG-Climbing-Belay-glasses-black/dp/B07TSFZVGJ"
-                            target="_blank" class="small-link" style="margin: 0;">Tootja lehele</a>
+                        <div class="image-gallery">
+                            <div class="gallery-item single">
+                                <img src="https://m.media-amazon.com/images/I/61T-nqfv99L._AC_SX679_.jpg"
+                                    alt="BG Belay Glasses" class="product-image" style="background: white;">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
+    <!-- Lightbox Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" id="closeModal">&times;</span>
+        <button class="modal-nav modal-prev" id="prevBtn">&#10094;</button>
+        <img class="modal-content" id="modalImg">
+        <button class="modal-nav modal-next" id="nextBtn">&#10095;</button>
     </div>
 
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const closeBtn = document.getElementById('closeModal');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const images = Array.from(document.querySelectorAll('.product-image'));
+        let currentIndex = 0;
+
+        function openModal(index) {
+            currentIndex = index;
+            modal.style.display = 'flex';
+            modalImg.src = images[currentIndex].src;
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            modalImg.src = images[currentIndex].src;
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            modalImg.src = images[currentIndex].src;
+        }
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => openModal(index));
+        });
+
+        closeBtn.onclick = closeModal;
+        nextBtn.onclick = (e) => { e.stopPropagation(); showNext(); };
+        prevBtn.onclick = (e) => { e.stopPropagation(); showPrev(); };
+
+        modal.onclick = (e) => {
+            if (e.target === modal) closeModal();
+        };
+
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowRight') showNext();
+                if (e.key === 'ArrowLeft') showPrev();
+            }
+        });
+    </script>
 </body>
 
 </html>
